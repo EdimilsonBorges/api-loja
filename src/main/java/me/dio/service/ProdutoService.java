@@ -9,9 +9,9 @@ public interface ProdutoService {
     List<Produto> findAll();
     Produto findById(Long id);
     Produto create(Produto produto);
-    void delete(Long id);
 
+    Produto update(Produto produto, Long id);
+    void delete(Long id);
     boolean existsNome(String nome);
-    boolean existsId(Long id);
 
 }

@@ -5,12 +5,10 @@ import me.dio.controller.handler.NotFoundException;
 import me.dio.domain.model.Produto;
 import me.dio.domain.repository.ProdutoRepository;
 import me.dio.service.ProdutoService;
-import org.apache.logging.log4j.util.Supplier;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class ProdutoServiceImpl implements ProdutoService {
@@ -44,19 +42,45 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
+    public Produto update(Produto produtoToUpdate, Long id) {
+        Optional<Produto> produtoExistente = produtoRepository.findById(id);
+
+        if (produtoExistente.isPresent()) {
+            Produto produto = produtoExistente.get();
+            produto.setNome(produtoToUpdate.getNome());
+            produto.setDescricao(produtoToUpdate.getDescricao());
+            produto.setPreco(produtoToUpdate.getPreco());
+            produto.setGarantia(produtoToUpdate.getGarantia());
+            produto.setImagens(produtoToUpdate.getImagens());
+            produto.setCategorias(produtoToUpdate.getCategorias());
+            produto.setEspecificacoesTecnicas(produtoToUpdate.getEspecificacoesTecnicas());
+            produto.setDisponibilidade(produtoToUpdate.getDisponibilidade());
+            produto.setInformacoesFabricante(produtoToUpdate.getInformacoesFabricante());
+            produto.setTamanhoEmbalagem(produtoToUpdate.getTamanhoEmbalagem());
+            produto.setAvaliacoes(produtoToUpdate.getAvaliacoes());
+            // Você pode atualizar outros campos aqui conforme necessário
+
+            return produtoRepository.save(produto);
+        } else {
+            throw new NotFoundException("Produto não encontrado com ID: " + id);
+        }
+    }
+
+    @Override
     public void delete(Long id) {
-        produtoRepository.deleteById(id);
+        Optional<Produto> produtoExistente = produtoRepository.findById(id);
+
+        if (produtoExistente.isPresent()) {
+            produtoRepository.deleteById(id);
+        }else {
+            throw new NotFoundException("Produto com o ID ("+id+") não foi encontrado");
+        }
     }
 
     @Override
     public boolean existsNome(String nome) {
         return produtoRepository.existsByNome(nome);
 
-    }
-
-    @Override
-    public boolean existsId(Long id) {
-        return produtoRepository.existsById(id);
     }
 
 }
