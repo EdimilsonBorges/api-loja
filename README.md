@@ -1,6 +1,10 @@
 # api-loja
 Java RESTful api criada para o desafio santander
 
+Visite no link abaixo
+
+<a href="https://api-sant-desafio.up.railway.app/swagger-ui/index.html">https://api-sant-desafio.up.railway.app/swagger-ui/index.html</a>
+
 ## Diagrama
 
 ```mermaid
