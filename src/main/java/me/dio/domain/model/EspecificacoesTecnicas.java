@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity(name = "tb_especificacoes_tecnicas")
 public class EspecificacoesTecnicas {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String tamanho;
     @Column(nullable = false)

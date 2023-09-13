@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 @Entity(name = "tb_informacoes_fabricante")
 public class InformacoesFabricante {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(nullable = false)
     private String nome;

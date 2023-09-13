@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity(name = "tb_tamanho_embalagem")
 public class TamanhoEmbalagem {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(nullable = false)
     private String largura;

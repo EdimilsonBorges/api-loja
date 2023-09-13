@@ -6,7 +6,7 @@ import java.util.List;
 @Entity(name = "tb_produto")
 public class Produto {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(unique = true, nullable = false)
     private String nome;
@@ -17,7 +17,6 @@ public class Produto {
     private String garantia;
     @Column(nullable = false)
     private String[] imagens;
-    @Column(nullable = false)
     private String[] categorias;
     @OneToOne(cascade = CascadeType.ALL)
     private EspecificacoesTecnicas especificacoesTecnicas;
